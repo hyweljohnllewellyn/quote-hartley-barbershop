@@ -1,0 +1,109 @@
+
+<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+<<form  role="form" action="javascript:void(0);" onsubmit="AutoQuoteFunction()" id ="AutoQuoteForm" name="AutoQuoteForm">
+<div class="form-group row ">
+  <div class="col-sm-6">
+ <input type='text' id ='destination' class="form-control"  name='destination' placeholder="Enter a location" />
+  </div>
+</div>
+    <input type='hidden' id ='people' class="form-control"  name='people' value="4"/>
+    <input type='hidden' id ='performance' class="form-control"  name='performance' value="Barbershop Quartet"/>
+    <input type='hidden' id ='start' class="form-control"  name='start'  />
+    <input type='hidden' id ='end'   class="form-control"  name='end'    />
+<input class="btn btn-primary" type="submit" value="Calculate">
+</form>
+<br>
+<br>
+<h3><div class="bg-success" id="info" tabindex="1"></div></h3>
+<div id="map" style="width:100%;height:400px"></div>
+<p><div class="bg-info" id="result"></div></p>
+<!---------------------------->
+<!-- Amazon Gateway API START -->
+<script type="text/javascript">
+function AutoQuoteFunction() {
+//https://github.com/macek/jquery-serialize-object
+var body = $('form#AutoQuoteForm').serializeJSON();
+var params = {};
+var additionalParams = {};
+var apigClient = apigClientFactory.newClient();
+
+apigClient.autoquotePost(params, body, additionalParams)
+                .then(function(result){
+                  var jobject = JSON.parse(result.data);
+                  document.getElementById("start").value = jobject.origin;
+                  document.getElementById("end").value = jobject.destination;
+                  document.getElementById("info").innerHTML = "Your personalised quote: " + jobject.quote + "<br><br> For a performance of: " + jobject.performance;
+                  document.getElementById("info").focus();
+            }).catch(function(result){
+              document.getElementById("result").innerHTML = JSON.stringify(result);
+            });
+}
+</script>
+<!--Amazon Gateway API END -->
+<!--GOOGLE API START -->
+<!--https://developers.google.com/maps/documentation/javascript/examples/directions-simple-->
+<script>
+  function initMap() {
+    var directionsService = new google.maps.DirectionsService;
+    var directionsDisplay = new google.maps.DirectionsRenderer;
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 5,
+      center: {lat: 54.7, lng: -4.4}  // London lat: 51.5, lng: -0.2
+    });
+    directionsDisplay.setMap(map);
+
+    var input = /** @type {!HTMLInputElement} */(document.getElementById('destination'));
+
+    var autocomplete = new google.maps.places.Autocomplete(input);
+       autocomplete.bindTo('bounds', map);
+
+       var infowindow = new google.maps.InfoWindow();
+        var marker = new google.maps.Marker({
+          map: map,
+          anchorPoint: new google.maps.Point(0, -29)
+        });
+
+        autocomplete.addListener('place_changed', function() {
+          infowindow.close();
+          marker.setVisible(false);
+          var place = autocomplete.getPlace();
+          if (!place.geometry) {
+            window.alert("Autocomplete's returned place contains no geometry");
+            return;
+          }
+
+          // If the place has a geometry, then present it on a map.
+          if (place.geometry.viewport) {
+            map.fitBounds(place.geometry.viewport);
+          } else {
+            map.setCenter(place.geometry.location);
+            map.setZoom(17);  // Why 17? Because it looks good.
+          }
+          marker.setIcon(/** @type {google.maps.Icon} */({
+            url: place.icon,
+            size: new google.maps.Size(71, 71),
+            origin: new google.maps.Point(0, 0),
+            anchor: new google.maps.Point(17, 34),
+            scaledSize: new google.maps.Size(35, 35)
+          }));
+          marker.setPosition(place.geometry.location);
+          marker.setVisible(true);
+
+          var address = '';
+          if (place.address_components) {
+            address = [
+              (place.address_components[0] && place.address_components[0].short_name || ''),
+              (place.address_components[1] && place.address_components[1].short_name || ''),
+              (place.address_components[2] && place.address_components[2].short_name || '')
+            ].join(' ');
+          }
+
+          infowindow.setContent('<div><strong>' + place.name + '</strong><br>' + address);
+          infowindow.open(map, marker);
+        });
+}
+</script>
+   <script async defer
+   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDilQ5RIw097e0co1x4khlKpoToVnCr7o4&libraries=places&callback=initMap">
+   </script>
+<!-- GOOGLE API END -->
