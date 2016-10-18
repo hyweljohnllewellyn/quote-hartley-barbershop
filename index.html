@@ -14,7 +14,9 @@
     <script src="javascript/apiGateway-js-sdk/lib/apiGatewayCore/utils.js" type="text/javascript"></script>
     <script src="javascript/apiGateway-js-sdk/apigClient.js" type="text/javascript"></script>
     <script src="javascript/jquery-3.1.1.min.js" type="text/javascript"></script>
-    <script src="javascript/jquery.serialize-object.min.js" type="text/javascript"></script>  </head>
+    <script src="javascript/jquery.serialize-object.min.js" type="text/javascript"></script>
+    <script src="http://spin.js.org/spin.min.js" type="text/javascript"></script>
+    </head>
 <body style="background-color:#f4e3d1">
 <h3><div class="bg-success" id="info"  tabindex="1"></div></h3>
 <h3><div class="bg-primary" id="warning"></div></h3>
@@ -37,6 +39,34 @@
 <!-- Amazon Gateway API START -->
 <script type="text/javascript">
 function AutoQuoteFunction() {
+
+//http://spin.js.org/
+  var opts = {
+   lines: 13 // The number of lines to draw
+ , length: 28 // The length of each line
+ , width: 14 // The line thickness
+ , radius: 42 // The radius of the inner circle
+ , scale: 1 // Scales overall size of the spinner
+ , corners: 1 // Corner roundness (0..1)
+ , color: '#000' // #rgb or #rrggbb or array of colors
+ , opacity: 0.25 // Opacity of the lines
+ , rotate: 0 // The rotation offset
+ , direction: 1 // 1: clockwise, -1: counterclockwise
+ , speed: 1 // Rounds per second
+ , trail: 60 // Afterglow percentage
+ , fps: 20 // Frames per second when using setTimeout() as a fallback for CSS
+ , zIndex: 2e9 // The z-index (defaults to 2000000000)
+ , className: 'spinner' // The CSS class to assign to the spinner
+ , top: '50%' // Top position relative to parent
+ , left: '50%' // Left position relative to parent
+ , shadow: false // Whether to render a shadow
+ , hwaccel: false // Whether to use hardware acceleration
+ , position: 'absolute' // Element positioning
+ }
+ var target = document.getElementById('info')
+ var spinner = new Spinner(opts).spin(target);
+ $(target).data('spinner', spinner);
+
 //https://github.com/macek/jquery-serialize-object
 var body = $('form#AutoQuoteForm').serializeJSON();
 var params = {};
@@ -45,6 +75,9 @@ var apigClient = apigClientFactory.newClient();
 
 apigClient.autoquotePost(params, body, additionalParams)
                 .then(function(result){
+                  // stop the spinner spin.js
+                  $(target).stop();
+
                   var jobject = JSON.parse(result.data);
                   document.getElementById("info").innerHTML = "Your Instant Quote: \u00a3" + Math.ceil(jobject.quote);
             }).catch(function(result){
