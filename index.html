@@ -80,14 +80,15 @@ apigClient.autoquotePost(params, body, additionalParams)
           infowindow.close();
           marker.setVisible(false);
           var place = autocomplete.getPlace();
+          var warning = "no";
           if (!place.geometry) {
             document.getElementById("warning").innerHTML = "Please select a valid location";
+            var warning = "yes";
             //window.alert("Please select a valid location from the options");
             return;
           }
-          setTimeout(function(){
-            document.getElementById("warning").innerHTML = "";
-          }, 2000);
+          if(warning = "yes"){document.getElementById("warning").innerHTML = "";}
+
 
           // If the place has a geometry, then present it on a map.
           if (place.geometry.viewport) {
