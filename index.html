@@ -76,7 +76,7 @@ var apigClient = apigClientFactory.newClient();
 apigClient.autoquotePost(params, body, additionalParams)
                 .then(function(result){
                   // stop the spinner spin.js
-                  $(target).stop();
+                  spinner.stop();
 
                   var jobject = JSON.parse(result.data);
                   document.getElementById("info").innerHTML = "Your Instant Quote: \u00a3" + Math.ceil(jobject.quote);
