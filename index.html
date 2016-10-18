@@ -85,6 +85,9 @@ apigClient.autoquotePost(params, body, additionalParams)
             //window.alert("Please select a valid location from the options");
             return;
           }
+          setTimeout(function(){
+            document.getElementById("warning").innerHTML = "";
+          }, 2000);
 
           // If the place has a geometry, then present it on a map.
           if (place.geometry.viewport) {
