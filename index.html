@@ -42,7 +42,7 @@ var apigClient = apigClientFactory.newClient();
 apigClient.autoquotePost(params, body, additionalParams)
                 .then(function(result){
                   var jobject = JSON.parse(result.data);
-                  document.getElementById("info").innerHTML = "Your personalised quote: " + Math.ceil(jobject.quote);
+                  document.getElementById("info").innerHTML = "Your personalised quote: \u00a3" + Math.ceil(jobject.quote);
             }).catch(function(result){
               document.getElementById("result").innerHTML = JSON.stringify(result);
             });
