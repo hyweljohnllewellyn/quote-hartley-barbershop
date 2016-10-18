@@ -1,18 +1,21 @@
-  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
-  <script src="javascript/apiGateway-js-sdk/lib/axios/dist/axios.standalone.js" type="text/javascript"></script>
-  <script src="javascript/apiGateway-js-sdk/lib/CryptoJS/rollups/hmac-sha256.js" type="text/javascript"></script>
-  <script src="javascript/apiGateway-js-sdk/lib/CryptoJS/rollups/sha256.js" type="text/javascript"></script>
-  <script src="javascript/apiGateway-js-sdk/lib/CryptoJS/components/hmac.js" type="text/javascript"></script>
-  <script src="javascript/apiGateway-js-sdk/lib/CryptoJS/components/enc-base64.js" type="text/javascript"></script>
-  <script src="javascript/apiGateway-js-sdk/lib/url-template/url-template.js" type="text/javascript"></script>
-  <script src="javascript/apiGateway-js-sdk/lib/apiGatewayCore/sigV4Client.js" type="text/javascript"></script>
-  <script src="javascript/apiGateway-js-sdk/lib/apiGatewayCore/apiGatewayClient.js" type="text/javascript"></script>
-  <script src="javascript/apiGateway-js-sdk/lib/apiGatewayCore/simpleHttpClient.js" type="text/javascript"></script>
-  <script src="javascript/apiGateway-js-sdk/lib/apiGatewayCore/utils.js" type="text/javascript"></script>
-  <script src="javascript/apiGateway-js-sdk/apigClient.js" type="text/javascript"></script>
-  <script src="javascript/jquery-3.1.1.min.js" type="text/javascript"></script>
-  <script src="javascript/jquery.serialize-object.min.js" type="text/javascript"></script>
-
+<html>
+  <head>
+    <title>Hartley Voices Barbershop Instant Quoute</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+    <script src="javascript/apiGateway-js-sdk/lib/axios/dist/axios.standalone.js" type="text/javascript"></script>
+    <script src="javascript/apiGateway-js-sdk/lib/CryptoJS/rollups/hmac-sha256.js" type="text/javascript"></script>
+    <script src="javascript/apiGateway-js-sdk/lib/CryptoJS/rollups/sha256.js" type="text/javascript"></script>
+    <script src="javascript/apiGateway-js-sdk/lib/CryptoJS/components/hmac.js" type="text/javascript"></script>
+    <script src="javascript/apiGateway-js-sdk/lib/CryptoJS/components/enc-base64.js" type="text/javascript"></script>
+    <script src="javascript/apiGateway-js-sdk/lib/url-template/url-template.js" type="text/javascript"></script>
+    <script src="javascript/apiGateway-js-sdk/lib/apiGatewayCore/sigV4Client.js" type="text/javascript"></script>
+    <script src="javascript/apiGateway-js-sdk/lib/apiGatewayCore/apiGatewayClient.js" type="text/javascript"></script>
+    <script src="javascript/apiGateway-js-sdk/lib/apiGatewayCore/simpleHttpClient.js" type="text/javascript"></script>
+    <script src="javascript/apiGateway-js-sdk/lib/apiGatewayCore/utils.js" type="text/javascript"></script>
+    <script src="javascript/apiGateway-js-sdk/apigClient.js" type="text/javascript"></script>
+    <script src="javascript/jquery-3.1.1.min.js" type="text/javascript"></script>
+    <script src="javascript/jquery.serialize-object.min.js" type="text/javascript"></script>  </head>
+<body style="background-color:#f4e3d1">
 <h3><div class="bg-success" id="info"  tabindex="1"></div></h3>
 <form  role="form" action="javascript:void(0);" onsubmit="AutoQuoteFunction()" id ="AutoQuoteForm" name="AutoQuoteForm">
 <div class="form-group row ">
@@ -24,7 +27,7 @@
     <input type='hidden' id ='performance' class="form-control"  name='performance' value="Barbershop Quartet"/>
     <input type='hidden' id ='start' class="form-control"  name='start'  />
     <input type='hidden' id ='end'   class="form-control"  name='end'    />
-<input class="btn btn-primary" type="submit" value="Calculate">
+<input class="btn btn-primary" type="submit" value="Get Quote">
 </form>
 <br>
 <br>
@@ -42,7 +45,7 @@ var apigClient = apigClientFactory.newClient();
 apigClient.autoquotePost(params, body, additionalParams)
                 .then(function(result){
                   var jobject = JSON.parse(result.data);
-                  document.getElementById("info").innerHTML = "Your personalised quote: \u00a3" + Math.ceil(jobject.quote);
+                  document.getElementById("info").innerHTML = "Your Instant Quote: \u00a3" + Math.ceil(jobject.quote);
             }).catch(function(result){
               document.getElementById("result").innerHTML = JSON.stringify(result);
             });
@@ -116,3 +119,5 @@ apigClient.autoquotePost(params, body, additionalParams)
    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDpUhEU5tCdcKs_DBE_89ldWQ5Um2knEag&libraries=places&callback=initMap">
    </script>
 <!-- GOOGLE API END -->
+</body>
+</html>
