@@ -82,9 +82,7 @@ apigClient.autoquotePost(params, body, additionalParams)
           var place = autocomplete.getPlace();
           var warning = "no";
           if (!place.geometry) {
-            //document.getElementById("destination").placeholder= "Please enter a valid location";
             document.getElementById("destination").value= "";
-            //window.alert("Please select a valid location from the options");
             return;
           }
 
