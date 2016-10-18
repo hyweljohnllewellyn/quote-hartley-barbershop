@@ -81,7 +81,7 @@ apigClient.autoquotePost(params, body, additionalParams)
           marker.setVisible(false);
           var place = autocomplete.getPlace();
           if (!place.geometry) {
-            document.getElementById("warning").innerHTML = "Please select a valid location from the options";
+            document.getElementById("warning").innerHTML = "Please select a valid location";
             //window.alert("Please select a valid location from the options");
             return;
           }
