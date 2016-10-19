@@ -17,7 +17,7 @@
     <script src="javascript/jquery.serialize-object.min.js" type="text/javascript"></script>
     <script src="javascript/spin.min.js" type="text/javascript"></script>
     </head>
-<body  style="background-color:#f4e3d1">
+<body style="background-color:#f4e3d1">
 <div class="bg-success" id="info" tabindex="1"></div>
 <form  role="form" action="javascript:void(0);" onsubmit="AutoQuoteFunction()" id ="AutoQuoteForm" name="AutoQuoteForm">
 <div class="form-group row">
@@ -66,6 +66,10 @@ function AutoQuoteFunction() {
  var target = document.getElementById('info')
  var spinner = new Spinner(opts).spin(target);
 
+ var head = document.createElement("H3");
+ var info = document.getElementById("info");
+
+
 //https://github.com/macek/jquery-serialize-object
 var body = $('form#AutoQuoteForm').serializeJSON();
 var params = {};
@@ -78,7 +82,7 @@ apigClient.autoquotePost(params, body, additionalParams)
                   spinner.stop();
 
                   var jobject = JSON.parse(result.data);
-                  //document.getElementById('info').style.display = 'inline-block';
+                  info.appendChild(head);
                   document.getElementById("info").innerHTML = "Your Instant Quote: \u00a3" + Math.ceil(jobject.quote);
             }).catch(function(result){
               document.getElementById("result").innerHTML = JSON.stringify(result);
