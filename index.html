@@ -66,10 +66,6 @@ function AutoQuoteFunction() {
  var target = document.getElementById('info')
  var spinner = new Spinner(opts).spin(target);
 
- var head = document.createElement("H3");
- var info = document.getElementById("info");
-
-
 //https://github.com/macek/jquery-serialize-object
 var body = $('form#AutoQuoteForm').serializeJSON();
 var params = {};
@@ -82,8 +78,10 @@ apigClient.autoquotePost(params, body, additionalParams)
                   spinner.stop();
 
                   var jobject = JSON.parse(result.data);
-                  info.appendChild(head);
+                  var h = document.createElement("H3");
                   document.getElementById("info").innerHTML = "Your Instant Quote: \u00a3" + Math.ceil(jobject.quote);
+                  var t = document.getElementById("info").innerHTML;
+                  h.appendChild(t); 
             }).catch(function(result){
               document.getElementById("result").innerHTML = JSON.stringify(result);
             });
