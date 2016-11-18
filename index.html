@@ -22,7 +22,7 @@
 <div class="container">
 <div class="row">
 <div class="col-xs-5">
-<div class="alert alert-success hidden" id ="info">x</div>
+<div class="alert alert-success hidden" id ="info"></div>
 
 <form  role="form" action="javascript:void(0);" onsubmit="AutoQuoteFunction()" id ="AutoQuoteForm" name="AutoQuoteForm">
 <div class="form-group row">
@@ -109,15 +109,14 @@ apigClient.autoquotePost(params, body, additionalParams)
                   // stop the spinner spin.js
                   spinner.stop();
                   var jobject = JSON.parse(result.data);
-<<<<<<< HEAD
                   //document.getElementById("info").innerHTML = "<h2><strong>Your instant quote:</strong> \u00a3" + Math.ceil(jobject.quote)+"</h2>";
-                  $('.alert-success').html("<h2><strong>Your instant quote:</strong> \u00a3" + Math.ceil(jobject.quote)+"</h2>");
+                  $('.alert-success').html("<h3><strong>Your instant quote:</strong> \u00a3" + Math.ceil(jobject.quote)+"</h3>");
 
-=======
-                  document.getElementById("info").innerHTML = "<H3>Your Instant Quote: \u00a3" + Math.ceil(jobject.quote)+"</H3>";
->>>>>>> parent of 7029321... bg-success to alert success 2
+                  //document.getElementById("info").innerHTML = "<H3>Your Instant Quote: \u00a3" + Math.ceil(jobject.quote)+"</H3>";
                   // 18 November add alert-info
                   $('.alert-info').removeClass('hidden');
+                  $('.alert-success').removeClass('hidden');
+
 
 
             }).catch(function(result){
