@@ -36,7 +36,7 @@
 </div>
 <!--div id="map" ></div-->
 <div id="map" style="width:100%;height:250px"></div>
-<div class="alert alert-danger hidden"></div>
+<div class="alert alert-danger hidden" id="danger" ></div>
 </div>
 <div class="col-xs-7">
 <div class="alert alert-info hidden"><strong>Please note</strong>, <i> that this quote is an estimate.  Holiday rates and unusual circumstances very occasionally apply.</i>
@@ -114,9 +114,9 @@ apigClient.autoquotePost(params, body, additionalParams)
 
 
             }).catch(function(result){
-              $('.alert-danger').html(JSON.stringify(result));
+              //$('.alert-danger').html(JSON.stringify(result));
               $('.alert-danger').removeClass('hidden');
-              //document.getElementById("result").innerHTML = JSON.stringify(result);
+              document.getElementById("danger").innerHTML = JSON.stringify(result);
             });
 }
 </script>
