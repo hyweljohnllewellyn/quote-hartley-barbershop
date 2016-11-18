@@ -21,7 +21,7 @@
 <body style="background-color:#f4e3d1">
 <div class="row">
 <div class="col-xs-5">
-<div class="bg-success" id="info" tabindex="1"></div>
+<div class="alert alert-success" id="info" tabindex="1"></div>
 
 <form  role="form" action="javascript:void(0);" onsubmit="AutoQuoteFunction()" id ="AutoQuoteForm" name="AutoQuoteForm">
 <div class="form-group row">
@@ -40,7 +40,7 @@
 </div>
 <div class="col-xs-7">
 <div class="alert alert-info hidden"><strong>Please note</strong>, <i> that this quote is an estimate.  Holiday rates and unusual circumstances very occasionally apply.</i>
-<br>
+<br><br>
 This rate is for the quartet to perform up to two 30 minute sets background or one 20 minute feature performance within a 3 hour period.
 <br>
 For longer performances or bespoke requests please
@@ -104,7 +104,7 @@ apigClient.autoquotePost(params, body, additionalParams)
                   // stop the spinner spin.js
                   spinner.stop();
                   var jobject = JSON.parse(result.data);
-                  document.getElementById("info").innerHTML = "<H3>Your Instant Quote: \u00a3" + Math.ceil(jobject.quote)+"</H3>";
+                  document.getElementById("info").innerHTML = "<Strong>Your Instant Quote: \u00a3" + Math.ceil(jobject.quote)+"</Strong";
                   // 18 November add alert-info
                   $('.alert-info').removeClass('hidden');
 
