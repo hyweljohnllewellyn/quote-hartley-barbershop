@@ -104,8 +104,8 @@ apigClient.autoquotePost(params, body, additionalParams)
                   // stop the spinner spin.js
                   spinner.stop();
                   var jobject = JSON.parse(result.data);
-                  //$('.alert-success').html("<h2><strong>Your instant quote:</strong> \u00a3" + Math.ceil(jobject.quote)+"</h2>");
-                  $('.alert-success').html("<h2><strong>Your instant quote:</strong> \u00a3</h2>");
+                  $('.alert-success').innerHTML = "<h2><strong>Your instant quote:</strong> \u00a3" + Math.ceil(jobject.quote)+"</h2>";
+                  //$('.alert-success')..innerHTML ("<h2><strong>Your instant quote:</strong> \u00a3</h2>");
 
                   // 18 November add alert-info
                   $('.alert-info').removeClass('hidden');
