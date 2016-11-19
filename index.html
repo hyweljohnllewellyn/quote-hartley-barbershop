@@ -120,7 +120,7 @@ apigClient.autoquotePost(params, body, additionalParams)
 
                     var posturl = 'https://formspree.io/hywel.llewellyn@gmail.com';
                     var data = $('#AutoQuoteForm').serializeArray();
-                    wordlist = $('.alert-success').value;
+                    wordlist = $('.alert-success').html();
                     data.push({quote: 'quote', value: wordlist});
                       var jqxhr = $.post(posturl, data);
 
