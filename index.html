@@ -33,7 +33,7 @@
     <input type='hidden' id ='start' class="form-control"  name='start'  />
     <input type='hidden' id ='end'   class="form-control"  name='end'    />
 
-<button class="btn btn-primary" type="submit">Get Quote</button>
+<button class="btn btn-primary" id="button" type="submit">Get Quote</button>
 <br><br>
 <div class="form-group">
 <div id="map" style="width:100%;height:250px"></div>
@@ -93,7 +93,7 @@ function AutoQuoteFunction() {
  , hwaccel: false // Whether to use hardware acceleration
  , position: 'absolute' // Element positioning
  }
- var target = document.getElementById('destination');
+ var target = document.getElementById('button');
  var spinner = new Spinner(opts).spin(target);
 
 //https://github.com/macek/jquery-serialize-object
