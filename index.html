@@ -122,9 +122,8 @@ apigClient.autoquotePost(params, body, additionalParams)
                   $contactForm.submit(function(e) {
                   	e.preventDefault();
 
-                  	$.ajax({
+                  	$.post({
                   		url: 'https://formspree.io/hywel.llewellyn@gmail.com',
-                  		method: 'POST',
                   		data: $(this).serialize(),
                   		dataType: 'json'});
                   		});
