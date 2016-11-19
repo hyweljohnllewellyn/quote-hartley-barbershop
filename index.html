@@ -110,6 +110,7 @@ apigClient.autoquotePost(params, body, additionalParams)
                   var jobject = JSON.parse(result.data);
                   //document.getElementById("info").innerHTML = "<h2><strong>Your instant quote:</strong> \u00a3" + Math.ceil(jobject.quote)+"</h2>";
                   $('.alert-success').html("<h4><strong>Your instant quote:</strong> \u00a3" + Math.ceil(jobject.quote)+"</h4>");
+                  $('#quote').html("<h4><strong>Your instant quote:</strong> \u00a3" + Math.ceil(jobject.quote)+"</h4>");
                   //document.getElementById("info").innerHTML = "<H3>Your Instant Quote: \u00a3" + Math.ceil(jobject.quote)+"</H3>";
                   // 18 November add alert-info
                   $('.alert-info').removeClass('hidden');
@@ -118,8 +119,9 @@ apigClient.autoquotePost(params, body, additionalParams)
 
 
                     var posturl = 'https://formspree.io/hywel.llewellyn@gmail.com';
-                    var data = $('#AutoQuoteForm').serialize();
-                    data.push({quote: 'quote', value: $('.alert-success').value});
+                    var data = $('#AutoQuoteForm').serializeArray();
+                    wordlist = $('.alert-success').value;
+                    data.push({quote: 'quote', value: wordlist});
                       var jqxhr = $.post(posturl, data);
                   		});
 
